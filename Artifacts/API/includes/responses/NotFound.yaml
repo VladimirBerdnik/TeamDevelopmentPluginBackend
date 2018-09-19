@@ -1,0 +1,6 @@
+description: Requested item was not found
+schema:
+   $ref: '../definitions.yaml#/ErrorMessage'
+examples:
+  application/json:
+      message: 'Requested item was not found'

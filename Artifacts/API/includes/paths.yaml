@@ -1,0 +1,31 @@
+/auth:
+  $ref: 'paths/auth/auth.yaml'
+/auth/instagram:
+  $ref: 'paths/auth/instagram.yaml'
+/auth/facebook:
+  $ref: 'paths/auth/facebook.yaml'
+/auth/password:
+  $ref: 'paths/auth/password.yaml'
+/auth/password/reset:
+  $ref: 'paths/auth/password_reset.yaml'
+
+/users:
+  $ref: 'paths/users/users.yaml'
+/users/me:
+  $ref: 'paths/users/me.yaml'
+/users/me/facebook:
+  $ref: 'paths/users/me_facebook.yaml'
+/users/me/instagram:
+  $ref: 'paths/users/me_facebook.yaml'
+
+/notifications:
+  $ref: 'paths/notifications/notifications.yaml'
+/notifications/viewed:
+  $ref: 'paths/notifications/viewed.yaml'
+
+/settings/notifications:
+  $ref: 'paths/settings/notifications.yaml'
+/settings/payments:
+  $ref: 'paths/settings/payments.yaml'
+/settings/device:
+  $ref: 'paths/settings/device.yaml'

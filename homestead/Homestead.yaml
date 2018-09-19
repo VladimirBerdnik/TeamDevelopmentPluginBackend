@@ -1,0 +1,31 @@
+# README: https://laravel.com/docs/homestead
+---
+box: "laravel/homestead"
+version: ">= 2.0"
+
+ip: "192.168.111.10"
+memory: 1024
+cpus: 1
+
+# One of virtualbox, vmware_fusion, vmware_workstation, parallels
+provider: virtualbox
+# How guest VM identifies itself
+hostname: team-development
+# Name, visible in VirtualBox UI
+name: team-development-vagrant
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: "."
+      to: "/home/vagrant/development"
+
+sites:
+    - map: team-development.lo
+      to: "/home/vagrant/development/public"
+
+databases:
+    - team-development

@@ -1,0 +1,47 @@
+swagger: '2.0'
+info:
+  title: Team Development
+  description: Here should be project description
+  version:
+    $ref: 'version.yaml'
+  contact:
+    name: Sergey Populov
+    email: sergey@saritasa.com
+    url: https://crm.saritasa.com/projects/general.aspx?projectId=1
+
+# the domain of the service
+host: team-development.saritasa-hosting.com
+# array of all schemes that your API supports
+schemes: [https, http]
+# will be prefixed to all paths
+basePath: /api
+
+consumes:
+- application/json
+
+produces:
+- application/json
+
+securityDefinitions:
+  AuthToken:
+    type: apiKey
+    in: header
+    name: Authorization
+  PasswordResetToken:
+    type: apiKey
+    in: query
+    name: ResetToken
+    # scopes:
+    #   ResetPassword: Used to reset password
+
+paths:
+  $ref: 'includes/paths.yaml'
+
+definitions:
+  $ref: 'includes/definitions.yaml'
+
+parameters:
+  $ref: 'includes/parameters.yaml'
+
+responses:
+  $ref: 'includes/responses.yaml'

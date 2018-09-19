@@ -1,0 +1,50 @@
+AuthToken:
+  $ref: 'definitions/AuthToken.yaml'
+
+ErrorMessage:
+  $ref: 'definitions/ErrorMessage.yaml'
+
+ErrorDetails:
+  $ref: 'definitions/ErrorDetails.yaml'
+
+LogoutInfo:
+  $ref: 'definitions/LogoutInfo.yaml'
+
+Identifier:
+  $ref: 'definitions/utils/Identifier.yaml'
+
+PaginationInfo:
+  $ref: 'definitions/utils/PaginationInfo.yaml'
+
+CursorPaginationInfo:
+  $ref: 'definitions/utils/CursorPaginationInfo.yaml'
+
+SuccessConfirmation:
+  $ref: 'definitions/SuccessConfirmation.yaml'
+
+User:
+  $ref: 'definitions/User.yaml'
+
+UserProfile:
+  $ref: 'definitions/UserProfile.yaml'
+
+Media:
+  $ref: 'definitions/Media.yaml'
+
+Notification:
+  $ref: 'definitions/Notification.yaml'
+
+NotificationsList:
+  $ref: 'definitions/lists/NotificationsList.yaml'
+
+NotificationSetting:
+  $ref: 'definitions/NotificationSetting.yaml'
+
+NotificationSettingsList:
+  $ref: 'definitions/lists/NotificationSettingsList.yaml'
+
+PaymentSettings:
+  $ref: 'definitions/PaymentSettings.yaml'
+
+Address:
+  $ref: 'definitions/Address.yaml'

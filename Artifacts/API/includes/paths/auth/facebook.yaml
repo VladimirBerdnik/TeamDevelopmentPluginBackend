@@ -1,0 +1,17 @@
+post:
+  tags: ['Authentication']
+  summary: Login with Facebook account
+  operationId: LoginFacebook
+  parameters:
+  - $ref: '../../parameters.yaml#/SocialLogin'
+  responses:
+    200:
+      description: Successful login
+      schema:
+        $ref: '../../definitions.yaml#/AuthToken'
+    400:
+      $ref: '../../responses.yaml#/InputValidationError'
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []

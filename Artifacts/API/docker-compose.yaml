@@ -1,0 +1,16 @@
+version: '2.1'
+services:
+
+  mockserver:
+    image: docker.saritasa.com/alpine-mockserver:0.6
+    hostname: team-development-mockserver
+    container_name: team-development-mockserver
+    mem_limit: 536870912
+    expose:
+    - 8000
+    environment:
+    - SWAGGER_FILE_URL=https://apidocs.saritasa-hosting.com/team-development/develop/team-development-latest.yaml
+    stdin_open: true
+    tty: true
+    volumes:
+    - .:/home/www/app/data/

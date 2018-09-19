@@ -1,0 +1,33 @@
+post:
+  tags: ['User']
+  summary: Link Facebook account
+  operationId: LinkFacebook
+  parameters:
+  - $ref: '../../parameters.yaml#/SocialLogin'
+  responses:
+    201:
+      description: Account linked successfully
+      schema:
+        $ref: '../../definitions.yaml#/User'
+    400:
+      $ref: '../../responses.yaml#/InputValidationError'
+    401:
+      $ref: '../../responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security:
+    - AuthToken: []
+
+delete:
+  tags: ['User']
+  summary: Unlink Facebook account
+  operationId: UnlinkFacebook
+  responses:
+    204:
+      description: Account unlinked successfully
+    401:
+      $ref: '../../responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security:
+    - AuthToken: []

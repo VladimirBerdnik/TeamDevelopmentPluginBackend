@@ -1,0 +1,6 @@
+description: User not authorized - must login first
+schema:
+   $ref: '../definitions.yaml#/ErrorMessage'
+examples:
+  application/json:
+      message: 'User not authorized'

@@ -1,0 +1,62 @@
+PageSize:
+  description: Page size for paginated data
+  name: per_page
+  in: query
+  type: integer
+  allowEmptyValue: true
+  default: 30
+
+Page:
+  description: Page number for paginated data, 1-based
+  name: page
+  in: query
+  type: integer
+  allowEmptyValue: true
+  default: 1
+
+Cursor:
+  description: Pointer for cursor pagination
+  name: current
+  in: query
+  type: integer
+  allowEmptyValue: true
+  default: 0
+
+Include:
+  description: 'Comma-separated list of relations to include. For example: creator,references,items'
+  name: include
+  in: query
+  type: string
+
+SocialLogin:
+  description: Login or Register user with social account
+  name: socialLoginRequest
+  in: body
+  schema:
+    type: object
+    required:
+    - access_token
+    properties:
+      access_token:
+        type: string
+        description: Access token, issued by social network
+        example: lkjdf3ijlkfwuj908123u498r7y38kjsdfhaiurh43
+
+TwitterLogin:
+  description: Login or Register user with social account
+  name: socialLoginRequest
+  in: body
+  schema:
+    type: object
+    required:
+    - access_token
+    - access_token_secret
+    properties:
+      access_token:
+        type: string
+        description: Access token, issued by social network
+        example: lkjdf3ijlkfwuj908123u498r7y38kjsdfhaiurh43
+      access_token_secret:
+        type: string
+        description: Access token secret (required for some networks)
+        example: kjhdiou1niujh9187234y78123

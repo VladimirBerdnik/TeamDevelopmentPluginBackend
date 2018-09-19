@@ -1,0 +1,33 @@
+post:
+  tags: ['User']
+  summary: User registration
+  operationId: UserRegister
+  parameters:
+    - name: createUserRequest
+      in: body
+      required: true
+      schema:
+        type: object
+        allOf:
+          - $ref: '../../definitions.yaml#/User'
+          - type: object
+            required:
+              - password
+            properties:
+              password:
+                description: User password
+                type: string
+  responses:
+    201:
+      description: 'User successfully created'
+      schema:
+        type: object
+        allOf:
+        - type: object
+          properties:
+            user:
+              $ref: '../../definitions.yaml#/User'
+        - $ref: '../../definitions.yaml#/AuthToken'
+    400:
+      $ref: '../../responses.yaml#/InputValidationError'
+  security: []

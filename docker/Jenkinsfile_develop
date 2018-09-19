@@ -1,0 +1,46 @@
+def aws = fileLoader.fromGit('aws/aws.groovy', 'ssh://gitblit.saritasa.com/saritasa/jenkins-pipeline.git', '0.0.12', 'jenkins-ssh-credential', '')
+def vault = fileLoader.fromGit('secret/vault.groovy', 'ssh://gitblit.saritasa.com/saritasa/jenkins-pipeline.git', '0.0.12', 'jenkins-ssh-credential', '')
+def docker = fileLoader.fromGit('docker/docker.groovy', 'ssh://gitblit.saritasa.com/saritasa/jenkins-pipeline.git', '0.0.12', 'jenkins-ssh-credential', '')
+def saritasa = fileLoader.fromGit('utils/saritasa.groovy', 'ssh://gitblit.saritasa.com/saritasa/jenkins-pipeline.git', '0.0.12', 'jenkins-ssh-credential', '')
+
+node {
+    def git_config = [url: 'ssh://gitblit.saritasa.com/team-development/backend.git', branch: 'develop']
+    def project_id = 'team-development'
+    def image_name = 'docker.saritasa.com/team-development-backend:develop'
+    def compose_file = 'docker/develop.yaml'
+    def email_list = ['swat@saritasa.com': [ 'FAILURE' ]]
+    def swagger_mobile = 'mobile.yaml'
+    def vault_url = 'https://vault.saritasa.io:8200/v1/secret/team-development-backend-develop'
+
+    try {
+        stage('scm') {
+            saritasa.scm_checkout(git_config)
+        }
+        stage('credentials') {
+            credentials =  vault.credential_get(vault_url)
+            vault.config_provision(credentials, '.env.development')
+        }
+        stage('swagger') {
+            saritasa.swagger_generate('mobile.yaml', 'Artifacts/API', 'swagger_mobile.yaml')
+            def mobile_version = saritasa.swagger_version_get('swagger_mobile.yaml')
+            aws.s3([command: 'put', in: 'swagger_mobile.yaml', out:"s3://saritasa-swagger/${project_id}/${git_config.branch}/${project_id}-latest.yaml"])
+            aws.s3([command: 'put', in: 'swagger_mobile.yaml', out:"s3://saritasa-swagger/${project_id}/${git_config.branch}/${project_id}-${mobile_version}.yaml"])
+        }
+        stage('image build') {
+            docker.image_pull(image_name)
+            docker.image_build('docker/Dockerfile', image_name)
+            docker.image_push(image_name)
+        }
+        stage('rancher deploy') {
+            docker.rancher_deploy(project_id, compose_file, 'backend', true)
+            docker.rancher_deploy(project_id, compose_file, 'mockserver', true)
+        }
+        stage('sonarqube') {
+            saritasa.sonarqube_scan()
+        }
+    } catch (error) {
+        currentBuild.result = 'FAILURE'
+    } finally {
+        saritasa.email_message_notify(email_list, currentBuild.result)
+    }
+}

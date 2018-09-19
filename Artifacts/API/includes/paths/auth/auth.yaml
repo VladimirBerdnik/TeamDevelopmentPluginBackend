@@ -1,0 +1,93 @@
+post:
+  tags: ['Authentication']
+  summary: Login existing user, returns access token
+  operationId: Login
+  parameters:
+    - in: body
+      name: authRequest
+      description: Authentication Data
+      required: true
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            type: string
+            description: Registered user email
+            example: user@mail.com
+          password:
+            type: string
+            description: User password
+            format: password
+            example: 123456
+  responses:
+    200:
+      description: Successful login
+      schema:
+        $ref: '../../definitions.yaml#/AuthToken'
+    400:
+      $ref: '../../responses.yaml#/InputValidationError'
+    404:
+      description: User with these login and password was not found
+      schema:
+         $ref: '../../definitions.yaml#/ErrorMessage'
+      examples:
+        application/json:
+          {
+            message: 'Wrong login or password'
+          }
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security: []
+
+put:
+  tags: ['Authentication']
+  summary: Refresh the token and and return new authentication token
+  operationId: RefreshToken
+  parameters:
+    - in: body
+      name: refreshToken
+      description: Last authentication token
+      required: true
+      schema:
+        type: object
+        required:
+          - token
+        properties:
+          token:
+            type: string
+            description: Authentication token
+  responses:
+    200:
+      description: Successful refresh
+      schema:
+        $ref: '../../definitions.yaml#/AuthToken'
+    401:
+      description: Error regenerating token
+      schema:
+        $ref: '../../definitions.yaml#/ErrorMessage'
+      examples:
+        application/json:
+          {
+            message: "You must provide authentication token, that expired recently"
+          }
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []
+
+delete:
+  tags: ['Authentication']
+  summary: Logout, makes authentication token invalid
+  operationId: Logout
+  responses:
+    204:
+      description: Successful logout. No response content.
+    401:
+      $ref: '../../responses.yaml#/UserNotAuthorized'
+    default:
+      $ref: '../../responses.yaml#/APIErrorResponse'
+  security:
+  - AuthToken: []

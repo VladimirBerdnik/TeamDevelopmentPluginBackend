@@ -1,0 +1,5 @@
+type: string
+x-chance-type: url
+x-type-options:
+  domain: team-development-images.s3-us-west.amazonaws.com
+  extensions: ['gif', 'jpg', 'png']

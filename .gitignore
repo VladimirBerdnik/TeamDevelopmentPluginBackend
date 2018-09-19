@@ -1,0 +1,34 @@
+# Tools Specific files
+/.idea/*
+# Except db and debug connection servers
+!/.idea/runConfigurations/
+!/.idea/php.xml
+!/.idea/dataSources.xml
+
+.phpstorm.meta.php
+_ide_helper.php
+.vscode/
+.project
+/nbproject/
+.install
+/.data
+*.orig
+.grunt
+.sass-cache
+.vagrant/
+*.log
+
+# Packaged Dependencies
+/node_modules/
+/bower_components/
+/packages/
+/vendor/
+
+# Laravel files
+.env
+/public/assets/
+/public/storage/
+/public/images/
+/public/robots.txt
+/public/mix-manifest.json
+/resources/assets/html/

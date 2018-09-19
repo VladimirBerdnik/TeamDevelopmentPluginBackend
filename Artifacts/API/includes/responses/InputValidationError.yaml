@@ -1,0 +1,9 @@
+description: Input validation error
+schema:
+   $ref: '../definitions.yaml#/ErrorDetails'
+examples:
+  application/json:
+    message: 'The given data failed to pass validation'
+    errors:
+    - field: field_name
+      messages: ['field_name is required']
