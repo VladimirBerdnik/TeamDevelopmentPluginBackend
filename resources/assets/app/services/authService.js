@@ -14,7 +14,7 @@ export default {
    * Mutations from Vuex Store.
    */
   ...mapMutations({
-    loginMutation: LOGIN_MUTATION,
+    loginMutation:  LOGIN_MUTATION,
     logoutMutation: LOGOUT_MUTATION,
   }),
 

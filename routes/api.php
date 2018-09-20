@@ -11,11 +11,9 @@
 |
 */
 
+use App\Http\Controllers\Api\v1\EditedFilesApiController;
 use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
-use Saritasa\LaravelControllers\Api\JWTAuthApiController;
-use Saritasa\LaravelControllers\Api\ForgotPasswordApiController;
-use Saritasa\LaravelControllers\Api\ResetPasswordApiController;
 
 /**
  * Api router instance.
@@ -23,19 +21,11 @@ use Saritasa\LaravelControllers\Api\ResetPasswordApiController;
  * @var Router $api
  */
 $api = app(Router::class);
-$api->version(config('api.version'), ['middleware' => 'bindings'], function (Router $api) {
+$api->version(config('api.version'), ['middleware' => 'bindings'], function(Router $api) {
     $registrar = new ApiResourceRegistrar($api);
 
-    $registrar->post('auth', JWTAuthApiController::class, 'login');
-    $registrar->put('auth', JWTAuthApiController::class, 'refreshToken');
-
-    $registrar->post('auth/password/reset', ForgotPasswordApiController::class, 'sendResetLinkEmail');
-    $registrar->put('auth/password/reset', ResetPasswordApiController::class, 'reset');
-
-    // Group of routes that require authentication
-    $api->group(['middleware' => ['jwt.auth']], function (Router $api) {
-        $registrar = new ApiResourceRegistrar($api);
-
-        $registrar->delete('auth', JWTAuthApiController::class, 'logout');
-    });
+    /**
+     * File revisions routes.
+     */
+    $registrar->post('revisions', EditedFilesApiController::class, 'store');
 });

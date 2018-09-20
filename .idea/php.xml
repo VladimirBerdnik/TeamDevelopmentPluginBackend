@@ -111,6 +111,11 @@
       <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/vendor/arcanedev/log-viewer" />
       <path value="$PROJECT_DIR$/vendor/arcanedev/support" />
+      <path value="$PROJECT_DIR$/vendor/propaganistas/laravel-phone" />
+      <path value="$PROJECT_DIR$/vendor/giggsey/libphonenumber-for-php" />
+      <path value="$PROJECT_DIR$/vendor/saritasa/laravel-fluent-validation" />
+      <path value="$PROJECT_DIR$/vendor/julien-c/iso3166" />
+      <path value="$PROJECT_DIR$/vendor/giggsey/locale" />
     </include_path>
   </component>
   <component name="PhpProjectServersManager">
