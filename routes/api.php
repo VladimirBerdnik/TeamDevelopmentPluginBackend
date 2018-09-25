@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\Api\v1\EditedFilesApiController;
+use App\Http\Controllers\Api\v1\PingApiController;
 use Dingo\Api\Routing\Router;
 use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
 
@@ -23,6 +24,8 @@ use Saritasa\LaravelControllers\Api\ApiResourceRegistrar;
 $api = app(Router::class);
 $api->version(config('api.version'), ['middleware' => 'bindings'], function(Router $api) {
     $registrar = new ApiResourceRegistrar($api);
+
+    $registrar->get('ping', PingApiController::class, 'ping');
 
     /**
      * File revisions routes.
