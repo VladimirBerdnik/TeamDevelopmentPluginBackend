@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Http\JsonResponse;
 use Saritasa\LaravelControllers\Api\BaseApiController;
+use Saritasa\LaravelControllers\Responses\SuccessMessage;
 
 /**
  * Team Development plugin service ping controller. Allows to ping service and check that service started.
@@ -17,6 +18,6 @@ class PingApiController extends BaseApiController
      */
     public function ping(): JsonResponse
     {
-        return new JsonResponse(['pong']);
+        return new JsonResponse(new SuccessMessage('pong'));
     }
 }
