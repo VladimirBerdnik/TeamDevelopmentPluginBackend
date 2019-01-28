@@ -121,15 +121,13 @@ class EditedFilesService
     {
         Log::debug('New revision register attempt', $editedFileData->toArray());
         $editedFileVersions = $this->getRevisions($editedFileData)
-            ->keyBy(function (EditedFileData $editedFileData) {
-                return $editedFileData->developerName;
-            })
+            ->keyBy(EditedFileData::DEVELOPER_NAME)
             ->except($editedFileData->developerName)
             ->values()
             ->push($editedFileData);
 
         $this->setRevisions($editedFileData, $editedFileVersions);
 
-        return $editedFileVersions;
+        return $editedFileVersions->where(EditedFileData::CONTENT_HASH, '!=', $editedFileData->contentHash);
     }
 }
