@@ -27,8 +27,5 @@ $api->version(config('api.version'), ['middleware' => 'bindings'], function(Rout
 
     $registrar->get('ping', PingApiController::class, 'ping');
 
-    /**
-     * File revisions routes.
-     */
     $registrar->post('revisions', EditedFilesApiController::class, 'store');
 });
